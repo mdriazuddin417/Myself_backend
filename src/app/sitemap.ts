@@ -1,5 +1,5 @@
-import type { MetadataRoute } from "next"
 import { dummyBlogPosts, dummyProjects } from "@/lib/dummy-data"
+import type { MetadataRoute } from "next"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://alexjohnson.dev"

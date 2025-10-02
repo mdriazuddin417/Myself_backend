@@ -1,12 +1,12 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { useAuth } from "@/contexts/auth-context"
-import { Home, User, BookOpen, FolderOpen, FileText, Mail, Settings, LogOut, Menu, X } from "lucide-react"
-import { useState } from "react"
+
 import { cn } from "@/lib/utils"
+import { BookOpen, FileText, FolderOpen, Home, LogOut, Mail, Menu, Settings, User, X } from "lucide-react"
+import { useState } from "react"
 
 const publicNavItems = [
   { href: "/", label: "Home", icon: Home },
@@ -26,7 +26,13 @@ const adminNavItems = [
 
 export function Navigation() {
   const pathname = usePathname()
-  const { user, logout } = useAuth()
+  // const { user, logout } = useAuth()
+  const logout=()=>{}
+  const user={
+    id:"1",
+    name:"John Doe",
+    email:"john@example.com", role:"admin"
+  }
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const isAdmin = user?.role === "admin"

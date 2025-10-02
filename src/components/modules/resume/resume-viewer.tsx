@@ -1,32 +1,50 @@
-"use client"
+"use client";
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import type { Resume } from "@/lib/types"
-import { Download, ExternalLink, Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-react"
-import Link from "next/link"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import type { Resume } from "@/lib/types";
+import {
+  Download,
+  ExternalLink,
+  Github,
+  Globe,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+} from "lucide-react";
+import Link from "next/link";
 
 interface ResumeViewerProps {
-  resume: Resume
+  resume: Resume;
 }
 
 export function ResumeViewer({ resume }: ResumeViewerProps) {
   const handleDownload = () => {
     // In a real app, this would generate and download a PDF
-    window.print()
-  }
+    window.print();
+  };
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header Actions */}
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Resume</h1>
+        <div className="flex space-x-4">
+          <Link href="/resume/edit">
+          <Button>
+            <Download className="h-4 w-4 mr-2" />
+            Resume Edit
+          </Button>
+        </Link>
+
         <Button onClick={handleDownload}>
           <Download className="h-4 w-4 mr-2" />
           Download PDF
         </Button>
+        </div>
       </div>
 
       {/* Resume Content */}
@@ -34,13 +52,18 @@ export function ResumeViewer({ resume }: ResumeViewerProps) {
         {/* Personal Info */}
         <header className="text-center space-y-4">
           <h1 className="text-4xl font-bold">{resume.personalInfo.name}</h1>
-          <p className="text-xl text-muted-foreground">{resume.personalInfo.summary}</p>
+          <p className="text-xl text-muted-foreground">
+            {resume.personalInfo.summary}
+          </p>
 
           {/* Contact Info */}
           <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <Mail className="h-4 w-4" />
-              <a href={`mailto:${resume.personalInfo.email}`} className="hover:text-foreground">
+              <a
+                href={`mailto:${resume.personalInfo.email}`}
+                className="hover:text-foreground"
+              >
                 {resume.personalInfo.email}
               </a>
             </div>
@@ -90,7 +113,9 @@ export function ResumeViewer({ resume }: ResumeViewerProps) {
 
         {/* Experience */}
         <section>
-          <h2 className="text-2xl font-semibold mb-6">Professional Experience</h2>
+          <h2 className="text-2xl font-semibold mb-6">
+            Professional Experience
+          </h2>
           <div className="space-y-6">
             {resume.experience.map((exp) => (
               <div key={exp.id} className="space-y-3">
@@ -127,7 +152,9 @@ export function ResumeViewer({ resume }: ResumeViewerProps) {
                     <h3 className="text-lg font-semibold">
                       {edu.degree} in {edu.field}
                     </h3>
-                    <p className="text-primary font-medium">{edu.institution}</p>
+                    <p className="text-primary font-medium">
+                      {edu.institution}
+                    </p>
                   </div>
                   <div className="text-sm text-muted-foreground">
                     {edu.startDate} - {edu.endDate}
@@ -179,12 +206,20 @@ export function ResumeViewer({ resume }: ResumeViewerProps) {
                   <div className="flex justify-between items-start gap-4">
                     <div className="flex-1">
                       <h3 className="font-semibold">{cert.name}</h3>
-                      <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-                      <p className="text-sm text-muted-foreground">{cert.date}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {cert.issuer}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {cert.date}
+                      </p>
                     </div>
                     {cert.url && (
                       <Button asChild variant="ghost" size="sm">
-                        <Link href={cert.url} target="_blank" rel="noopener noreferrer">
+                        <Link
+                          href={cert.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <ExternalLink className="h-4 w-4" />
                         </Link>
                       </Button>
@@ -197,5 +232,5 @@ export function ResumeViewer({ resume }: ResumeViewerProps) {
         </section>
       </div>
     </div>
-  )
+  );
 }

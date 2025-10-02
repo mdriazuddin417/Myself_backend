@@ -13,7 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const FeatureProject = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/project`, {
     next: {
       tags: ["PROJECTS"],
     },
@@ -41,7 +41,7 @@ const FeatureProject = async () => {
             >
               <div className="relative overflow-hidden rounded-t-lg">
                 <Image
-                  src={project.images[0] || "https://swasthx-bucket.s3.ap-south-1.amazonaws.com/5ffee6fa772c-434f-bd01-3bf8daa560db.jpeg"}
+                  src={project?.images?.[0] || "https://swasthx-bucket.s3.ap-south-1.amazonaws.com/5ffee6fa772c-434f-bd01-3bf8daa560db.jpeg"}
                   alt={project.title}
                   width={600}
                   height={300}

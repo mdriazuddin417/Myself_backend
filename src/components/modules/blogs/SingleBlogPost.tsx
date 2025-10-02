@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { BlogPost } from "@/lib/types";
 import { Calendar, Clock, Eye } from "lucide-react";
@@ -16,7 +16,7 @@ const SingleBlogPost = ({ post }: { post: BlogPost }) => {
     <Card className="group hover:shadow-lg transition-all duration-300 pt-0">
       <div className="relative overflow-hidden rounded-t-lg">
         <Image
-          src={post.featuredImage || "/placeholder.svg?height=200&width=400"}
+          src={post.featuredImage || "https://swasthx-bucket.s3.ap-south-1.amazonaws.com/5ffee6fa772c-434f-bd01-3bf8daa560db.jpeg"}
           alt={post.title}
           width={400}
           height={200}
@@ -25,7 +25,7 @@ const SingleBlogPost = ({ post }: { post: BlogPost }) => {
       </div>
       <CardHeader>
         <div className="flex flex-wrap gap-2 mb-2">
-          {post.tags.slice(0, 2).map((tag) => (
+          {post?.tags?.slice(0, 2).map((tag) => (
             <Badge key={tag} variant="outline" className="text-xs">
               {tag}
             </Badge>

@@ -1,36 +1,39 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
-import { Analytics } from "@vercel/analytics/next"
-import "./globals.css"
-import { AuthProvider } from "@/contexts/auth-context"
-import { Navigation } from "@/components/navigation"
-import { Toaster } from "@/components/ui/toaster"
-import { Suspense } from "react"
-import { generateMetadata as generateSEOMetadata } from "@/lib/metadata"
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
+import "./globals.css";
 
-export const metadata: Metadata = generateSEOMetadata()
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Next Blog",
+  description: "A simple blog built with Next.js, Tailwind CSS, and shadcn/ui.",
+};
+// import { generateMetadata as generateSEOMetadata } from "@/lib/metadata";
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
-        <AuthProvider>
-          <div className="min-h-screen bg-background">
-            <Suspense fallback={<div>Loading...</div>}>
-              <Navigation />
-              <main>{children}</main>
-              <Toaster />
-            </Suspense>
-          </div>
-        </AuthProvider>
-        <Analytics />
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {/* <AuthProvider> */}
+          <Toaster richColors position="top-center" />
+          {children}
+        {/* </AuthProvider> */}
       </body>
     </html>
-  )
+  );
 }

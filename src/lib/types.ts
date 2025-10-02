@@ -30,7 +30,7 @@ export interface BlogPost {
 }
 
 export interface Project {
-  id: string
+  id?: string
   title: string
   slug?: string
   description: string
@@ -40,11 +40,11 @@ export interface Project {
   liveUrl?: string
   images: string[]
   featured: boolean
-  status: "completed" | "in-progress" | "planned"
-  startDate: Date
+  status: "COMPLETED" | "IN-PROGRESS" | "PLANNED"
+  startDate?: Date
   endDate?: Date
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export interface Resume {

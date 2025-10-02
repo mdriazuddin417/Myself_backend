@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin/", "/login"],
+      disallow: ["/dashboard/", "/login"],
     },
     sitemap: "https://alexjohnson.dev/sitemap.xml",
   }
