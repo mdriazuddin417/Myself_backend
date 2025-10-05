@@ -10,9 +10,12 @@ import { getAllProject } from "@/services/ProjectService";
 
 import { BookOpen, Eye, FolderOpen } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function AdminDashboard() {
+  const { data: session, status } = useSession();
+  const user = session?.user as User | undefined;
+
   const [allData, setAllData] = useState<{
     blogPosts: BlogPost[];
     projects: Project[];
@@ -20,56 +23,68 @@ export default function AdminDashboard() {
     blogPosts: [],
     projects: [],
   });
+
+  // fetch once, client-side
   useEffect(() => {
+    let ignore = false;
     const fetchData = async () => {
-      const blogPosts = await getAllBlog();
-      const projects = await getAllProject();
-      setAllData({
-        blogPosts,
-        projects,
-      });
+      try {
+        const [blogPosts, projects] = await Promise.all([
+          getAllBlog(),
+          getAllProject(),
+        ]);
+        if (!ignore) {
+          setAllData({ blogPosts, projects });
+        }
+      } catch (err) {
+        // Optional: surface an error UI/toast
+        console.error("Failed to load dashboard data", err);
+      }
     };
     fetchData();
-  });
-  const session = useSession();
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
-  const user = session.data?.user as User;
+  const { publishedPosts, draftPosts, totalViews, stats } = useMemo(() => {
+    const publishedPosts = allData.blogPosts.filter((post) => post.published);
+    const draftPosts = allData.blogPosts.filter((post) => !post.published);
+    const totalViews = allData.blogPosts.reduce((sum, post) => sum + post.views, 0);
 
-  const publishedPosts = allData.blogPosts.filter((post) => post.published);
-  const draftPosts = allData.blogPosts.filter((post) => !post.published);
-  const totalViews = allData.blogPosts.reduce(
-    (sum, post) => sum + post.views,
-    0
-  );
+    const stats = [
+      {
+        title: "Published Posts",
+        value: publishedPosts.length,
+        description: `${draftPosts.length} drafts`,
+        icon: BookOpen,
+        color: "text-blue-600",
+        bgColor: "bg-blue-100 dark:bg-blue-900/20",
+      },
+      {
+        title: "Projects",
+        value: allData.projects.length,
+        description: `${allData.projects.filter((p) => p.featured).length} featured`,
+        icon: FolderOpen,
+        color: "text-green-600",
+        bgColor: "bg-green-100 dark:bg-green-900/20",
+      },
+      {
+        title: "Total Views",
+        value: totalViews.toLocaleString(),
+        description: "All time",
+        icon: Eye,
+        color: "text-purple-600",
+        bgColor: "bg-purple-100 dark:bg-purple-900/20",
+      },
+    ];
 
-  const stats = [
-    {
-      title: "Published Posts",
-      value: publishedPosts.length,
-      description: `${draftPosts.length} drafts`,
-      icon: BookOpen,
-      color: "text-blue-600",
-      bgColor: "bg-blue-100 dark:bg-blue-900/20",
-    },
-    {
-      title: "Projects",
-      value: allData.projects.length,
-      description: `${
-        allData.projects.filter((p) => p.featured).length
-      } featured`,
-      icon: FolderOpen,
-      color: "text-green-600",
-      bgColor: "bg-green-100 dark:bg-green-900/20",
-    },
-    {
-      title: "Total Views",
-      value: totalViews.toLocaleString(),
-      description: "All time",
-      icon: Eye,
-      color: "text-purple-600",
-      bgColor: "bg-purple-100 dark:bg-purple-900/20",
-    },
-  ];
+    return { publishedPosts, draftPosts, totalViews, stats };
+  }, [allData]);
+
+  // Optional: handle auth loading state (prevents hydration mismatch & undefined reads)
+  const greeting =
+    status === "loading" ? "..." : (user?.name ?? "there");
 
   return (
     <div className="min-h-screen py-8">
@@ -77,7 +92,7 @@ export default function AdminDashboard() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          <p className="text-muted-foreground">Welcome back, {user.name}!</p>
+          <p className="text-muted-foreground">Welcome back, {greeting}!</p>
         </div>
 
         {/* Stats Grid */}
