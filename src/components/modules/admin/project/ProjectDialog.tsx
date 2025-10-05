@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Project } from "@/lib/types";
 import { createProject, updateProject } from "@/services/ProjectService";
 import { Edit } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -36,6 +37,7 @@ const ProjectDialog = ({
   setSelectedProject = () => {},
   useCase = "add",
 }: Props) => {
+    const session = useSession();
   const [isEditing, setIsEditing] = useState(useCase === "add" ? true : false);
   const [open, setOpen] = useState(false); // control dialog
   const updateProjectById = async () => {
@@ -55,8 +57,7 @@ const ProjectDialog = ({
   };
   const addProject = async () => {
     const startToastId = toast.loading("Creating project...");
-    console.log({ selectedProject });
-    const result = await createProject({ ...selectedProject, userId: "" });
+    const result = await createProject({ ...selectedProject, userId: session.data?.user?.id });
     toast.dismiss(startToastId);
     setOpen(false);
     if (result) {

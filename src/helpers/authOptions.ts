@@ -9,6 +9,7 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
+      role: "ADMIN" | "USER";
     };
   }
   interface User {
@@ -16,6 +17,7 @@ declare module "next-auth" {
     name?: string | null;
     email?: string | null;
     image?: string | null;
+     role: "ADMIN" | "USER";
   }
 }
 
@@ -40,7 +42,7 @@ export const authOptions: NextAuthOptions = {
 
         try {
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_API}/auth/login`,
+            `${process.env.NEXT_PUBLIC_BASE_API}/api/v1/auth/login`,
             {
               method: "POST",
               headers: {
@@ -65,6 +67,7 @@ export const authOptions: NextAuthOptions = {
               name: user?.name,
               email: user?.email,
               image: user?.picture,
+              role: user?.role,
             };
           } else {
             return null;
@@ -80,12 +83,16 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user?.id;
+        token.email = user?.email;
+        token.role = user?.role;
       }
       return token;
     },
     async session({ session, token }) {
       if (session?.user) {
         session.user.id = token?.id as string;
+        session.user.email = token?.email as string;
+        session.user.role = token?.role as "ADMIN" | "USER";
       }
       return session;
     },

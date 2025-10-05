@@ -2,6 +2,7 @@
 
 import BestProjectAdmin from "@/components/modules/admin/blog/BestProjectAdmin";
 import RecentBlogAdmin from "@/components/modules/admin/blog/RecentBlogAdmin";
+import { User } from "@/components/navigation";
 import {
   Card,
   CardContent,
@@ -13,28 +14,15 @@ import {
   dummyContactMessages,
   dummyProjects,
 } from "@/lib/dummy-data";
-import { BookOpen, Edit, Eye, FolderOpen, Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { BookOpen, Eye, FolderOpen } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 export default function AdminDashboard() {
-  const router = useRouter();
-  const user = {
-    name: "Riaz Uddin",
-  };
 
-  // useEffect(() => {
-  //   if (!isLoading && (!user || user.role !== "admin")) {
-  //     router.push("/login")
-  //   }
-  // }, [user, isLoading, router])
+  const session = useSession();
 
-  // if (isLoading) {
-  //   return <div className="min-h-screen flex items-center justify-center">Loading...</div>
-  // }
+  const user = session.data?.user as User;
 
-  // if (!user || user.role !== "admin") {
-  //   return null
-  // }
 
   const publishedPosts = dummyBlogPosts.filter((post) => post.published);
   const draftPosts = dummyBlogPosts.filter((post) => !post.published);
@@ -68,22 +56,7 @@ export default function AdminDashboard() {
     },
   ];
 
-  const quickActions = [
-    {
-      title: "New Blog Post",
-      description: "Create a new article",
-      icon: Plus,
-      href: "/admin/blog/new",
-      color: "bg-primary text-primary-foreground",
-    },
-    {
-      title: "Manage Blog",
-      description: "Edit existing posts",
-      icon: Edit,
-      href: "/admin/blog",
-      color: "bg-secondary text-secondary-foreground",
-    },
-  ];
+
 
   return (
     <div className="min-h-screen py-8">

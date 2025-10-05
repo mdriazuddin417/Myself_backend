@@ -56,7 +56,7 @@ const HeroSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 rounded-2xl blur-3xl" />
                   <div className="relative bg-card border border-border rounded-2xl p-8 backdrop-blur-sm">
                     <Image
-                      src="/professional-headshot.png"
+                      src="https://i.ibb.co.com/RpMrKhv9/my-photo.jpg"
                       alt="Alex Johnson - Professional Headshot"
                       width={400}
                       height={400}

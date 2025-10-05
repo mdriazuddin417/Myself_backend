@@ -20,9 +20,9 @@ export default function Footer() {
           {/* Left */}
           <div>
             <h2 className="text-white text-xl font-semibold mb-1">
-              Next level™
+              Advance Developer
             </h2>
-            <p className="text-sm text-gray-400">Smart blog System</p>
+            <p className="text-sm text-gray-400">Smart People</p>
           </div>
 
           {/* Center Nav */}
