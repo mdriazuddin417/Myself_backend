@@ -16,10 +16,9 @@ import { toast } from "sonner"
 
 interface ResumeEditorProps {
   resume: Resume
-  onSave: (resume: Resume) => void
 }
 
-export function ResumeEditor({ resume, onSave }: ResumeEditorProps) {
+export function ResumeEditor({ resume }: ResumeEditorProps) {
   const router = useRouter()
   const [editedResume, setEditedResume] = useState<Resume>(resume)
 

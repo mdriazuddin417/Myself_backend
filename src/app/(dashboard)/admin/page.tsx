@@ -10,12 +10,11 @@ import { getAllProject } from "@/services/ProjectService";
 
 import { BookOpen, Eye, FolderOpen } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
-  const router = useRouter()
+  // const router = useRouter()
   const user = session?.user as User | undefined;
 
   const [allData, setAllData] = useState<{
@@ -49,7 +48,7 @@ export default function AdminDashboard() {
     };
   }, []);
 
-  const { publishedPosts, draftPosts, totalViews, stats } = useMemo(() => {
+  const { stats } = useMemo(() => {
     const publishedPosts = allData.blogPosts.filter((post) => post.published);
     const draftPosts = allData.blogPosts.filter((post) => !post.published);
     const totalViews = allData.blogPosts.reduce((sum, post) => sum + post.views, 0);

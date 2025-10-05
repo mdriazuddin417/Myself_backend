@@ -67,7 +67,6 @@ export default function AddBlogsForm({
 
   // Pre-fill form for edit mode
   useEffect(() => {
-    console.log({ post });
     if (post) {
       form.reset({
         title: post.title,
@@ -81,7 +80,7 @@ export default function AddBlogsForm({
       });
       setImagePreview(post.featuredImage || null);
     }
-  }, [post]);
+  }, [post,form]);
 
   const onSubmit = async (data: FormValues) => {
   const action = useCase === "edit" ? "Updating" : "Creating";

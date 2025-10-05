@@ -4,7 +4,7 @@ import { File, Home, PlusCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function Sidebar() {
-  const session = { status: "authenticated" };
+    // const {status} = useSession();
 
   const allAdminNavigation = [
     { icon: Home, title: "Home", path: "/" },
@@ -31,7 +31,7 @@ export default function Sidebar() {
 
       {/* Bottom action */}
       {/* <div className="p-4 border-t border-gray-500">
-        {session.status === "authenticated" && (
+        {status === "authenticated" && (
           <Button
             variant="destructive"
             className="w-full justify-start gap-2 cursor-pointer"
