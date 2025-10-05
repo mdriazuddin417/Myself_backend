@@ -44,7 +44,7 @@ const ProjectDialog = ({
     const startToastId = toast.loading("Updating project...");
     const result = await updateProject(
       selectedProject?.id as string,
-      selectedProject
+      selectedProject as Partial<Project>
     );
     toast.dismiss(startToastId);
     setOpen(false);
@@ -101,7 +101,7 @@ const ProjectDialog = ({
                   onValueChange={(value) =>
                     setSelectedProject({
                       ...selectedProject,
-                      status: value as any,
+                      status: value as "COMPLETED" | "IN-PROGRESS" | "PLANNED",
                     })
                   }
                 >

@@ -12,7 +12,7 @@ const HeroSection = () => {
               <div className="space-y-8">
                 <div className="space-y-4">
                   <h1 className="text-4xl lg:text-6xl font-bold text-balance">
-                    Hi, I'm <span className="text-primary">MD. Riaz Uddin</span>
+                    Hi, I &apos m <span className="text-primary">MD. Riaz Uddin</span>
                   </h1>
                   <p className="text-xl lg:text-2xl text-muted-foreground text-pretty">
                     Full-Stack Developer crafting exceptional digital experiences with modern technologies

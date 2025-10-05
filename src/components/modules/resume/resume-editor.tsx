@@ -5,11 +5,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { useToast } from "@/hooks/use-toast"
+
 import type { Resume } from "@/lib/types"
 import { Eye, Plus, Save, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
+import { toast } from "sonner"
 
 interface ResumeEditorProps {
   resume: Resume
@@ -18,14 +19,11 @@ interface ResumeEditorProps {
 
 export function ResumeEditor({ resume, onSave }: ResumeEditorProps) {
   const [editedResume, setEditedResume] = useState<Resume>(resume)
-  const { toast } = useToast()
+
 
   const handleSave = () => {
     onSave(editedResume)
-    toast({
-      title: "Resume saved!",
-      description: "Your resume has been updated successfully.",
-    })
+    toast.success("Resume saved successfully")
   }
 
   const updatePersonalInfo = (field: string, value: string) => {
@@ -55,7 +53,7 @@ export function ResumeEditor({ resume, onSave }: ResumeEditorProps) {
     }))
   }
 
-  const updateExperience = (id: string, field: string, value: any) => {
+  const updateExperience = (id: string, field: string, value: string | string[]) => {
     setEditedResume((prev) => ({
       ...prev,
       experience: prev.experience.map((exp) => (exp.id === id ? { ...exp, [field]: value } : exp)),
@@ -86,7 +84,7 @@ export function ResumeEditor({ resume, onSave }: ResumeEditorProps) {
     }))
   }
 
-  const updateEducation = (id: string, field: string, value: any) => {
+  const updateEducation = (id: string, field: string, value: string | string[]) => {
     setEditedResume((prev) => ({
       ...prev,
       education: prev.education.map((edu) => (edu.id === id ? { ...edu, [field]: value } : edu)),
@@ -111,7 +109,7 @@ export function ResumeEditor({ resume, onSave }: ResumeEditorProps) {
     }))
   }
 
-  const updateSkillCategory = (index: number, field: string, value: any) => {
+  const updateSkillCategory = (index: number, field: string, value: string | string[]) => {
     setEditedResume((prev) => ({
       ...prev,
       skills: prev.skills.map((skill, i) => (i === index ? { ...skill, [field]: value } : skill)),
@@ -311,7 +309,7 @@ export function ResumeEditor({ resume, onSave }: ResumeEditorProps) {
                   <Textarea
                     rows={4}
                     value={exp.achievements.join("\n")}
-                    onChange={(e) => updateExperience(exp.id, "achievements", e.target.value.split("\n"))}
+                    onChange={(e) => updateExperience(exp.id, "achievements", e.target.value.split("\n") ?? [])}
                   />
                 </div>
               </div>

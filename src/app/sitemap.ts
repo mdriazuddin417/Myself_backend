@@ -1,43 +1,50 @@
-import { dummyBlogPosts, dummyProjects } from "@/lib/dummy-data"
-import type { MetadataRoute } from "next"
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://alexjohnson.dev"
+import { BlogPost, Project } from "@/lib/types";
+import { getAllBlog } from "@/services/PostServices";
+import { getAllProject } from "@/services/ProjectService";
+import type { MetadataRoute } from "next";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+
+  const allPosts = await getAllBlog();
+  const allProject = await getAllProject();
+
+
 
   // Static pages
   const staticPages = [
     {
-      url: baseUrl,
+      url: process.env.NEXT_PUBLIC_BASE_API,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 1,
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${process.env.NEXT_PUBLIC_BASE_API}/about`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${process.env.NEXT_PUBLIC_BASE_API}/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/projects`,
+      url: `${process.env.NEXT_PUBLIC_BASE_API}/projects`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/resume`,
+      url: `${process.env.NEXT_PUBLIC_BASE_API}/resume`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `${process.env.NEXT_PUBLIC_BASE_API}/contact`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.6,
@@ -45,18 +52,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   // Blog posts
-  const blogPages = dummyBlogPosts
-    .filter((post) => post.published)
-    .map((post) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
+  const blogPages = allPosts
+    .filter((post: BlogPost) => post.published)
+    .map((post: BlogPost) => ({
+      url: `${process.env.NEXT_PUBLIC_BASE_API}/blog/${post.slug}`,
       lastModified: post.updatedAt,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }))
 
   // Projects
-  const projectPages = dummyProjects.map((project) => ({
-    url: `${baseUrl}/projects/${project.id}`,
+  const projectPages = allProject.map((project: Project) => ({
+    url: `${process.env.NEXT_PUBLIC_BASE_API}/projects/${project.id}`,
     lastModified: project.updatedAt,
     changeFrequency: "monthly" as const,
     priority: 0.6,

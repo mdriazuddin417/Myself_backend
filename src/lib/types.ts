@@ -44,7 +44,8 @@ export interface Project {
   startDate?: Date
   endDate?: Date
   createdAt?: Date
-  updatedAt?: Date
+  updatedAt?: Date,
+  userId?: string
 }
 
 export interface Resume {

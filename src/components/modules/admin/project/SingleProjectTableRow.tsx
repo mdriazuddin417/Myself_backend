@@ -4,7 +4,7 @@ import CustomAlertDialog from "@/components/shared/CustomAlertDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { dummyProjects } from "@/lib/dummy-data";
+
 import { Project } from "@/lib/types";
 import { deleteProjectById } from "@/services/ProjectService";
 import { Eye, Star, Trash2 } from "lucide-react";
@@ -13,15 +13,9 @@ import { toast } from "sonner";
 import ProjectDialog from "./ProjectDialog";
 
 const SingleProjectTableRow = ({ project }: { project: Project }) => {
-  const [selectedProject, setSelectedProject] = useState<
-    (typeof dummyProjects)[0] | null
-  >(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const toggleFeatured = (projectId: string) => {
-    // setProjects(
-    //   projects.map((project) => (project.id === projectId ? { ...project, featured: !project.featured } : project)),
-    // )
-  };
+
 
   const deleteProject = async (projectId: string) => {
     const startToastId = toast.loading("Deleting project...");
@@ -60,7 +54,7 @@ const SingleProjectTableRow = ({ project }: { project: Project }) => {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => toggleFeatured(project.id as string)}
+
         >
           <Star
             className={`h-4 w-4 ${
@@ -83,7 +77,7 @@ const SingleProjectTableRow = ({ project }: { project: Project }) => {
           )}
         </div>
       </TableCell>
-      <TableCell>{new Date(project.updatedAt)?.toLocaleDateString()}</TableCell>
+      <TableCell>{new Date(project.updatedAt ??'')?.toLocaleDateString()}</TableCell>
       <TableCell>
         <div className="flex items-center gap-2">
           <ProjectDialog
@@ -103,7 +97,7 @@ const SingleProjectTableRow = ({ project }: { project: Project }) => {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => toggleFeatured(project.id as string)}
+           
           >
             <Star
               className={`h-4 w-4 ${

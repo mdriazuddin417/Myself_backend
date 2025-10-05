@@ -2,13 +2,13 @@
 
 import type React from "react"
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Globe } from "lucide-react"
+import { Github, Globe, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react"
+import { useState } from "react"
 
 export default function ContactClientPage() {
   const [formData, setFormData] = useState({
@@ -50,7 +50,7 @@ export default function ContactClientPage() {
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-foreground mb-4">Get In Touch</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Have a project in mind or want to collaborate? I'd love to hear from you. Let's discuss how we can work
+              Have a project in mind or want to collaborate? I&apos;d love to hear from you. Let&apos;s discuss how we can work
               together to bring your ideas to life.
             </p>
           </div>
@@ -59,9 +59,9 @@ export default function ContactClientPage() {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-2xl font-bold text-foreground mb-6">Let's Connect</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-6">Let&apos;s Connect</h2>
                 <p className="text-muted-foreground mb-8">
-                  I'm always open to discussing new opportunities, interesting projects, or just having a chat about
+                  I&apos;m always open to discussing new opportunities, interesting projects, or just having a chat about
                   technology and development.
                 </p>
               </div>
@@ -141,7 +141,7 @@ export default function ContactClientPage() {
                     <span className="font-medium text-foreground">Available for new projects</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    I'm currently accepting new freelance projects and consulting opportunities. Typical response time
+                    I&apos;m currently accepting new freelance projects and consulting opportunities. Typical response time
                     is within 24 hours.
                   </p>
                 </CardContent>
@@ -161,7 +161,7 @@ export default function ContactClientPage() {
                     </div>
                     <h3 className="text-lg font-semibold text-foreground mb-2">Message Sent!</h3>
                     <p className="text-muted-foreground">
-                      Thank you for reaching out. I'll get back to you as soon as possible.
+                      Thank you for reaching out. I&apos;ll get back to you as soon as possible.
                     </p>
                   </div>
                 ) : (

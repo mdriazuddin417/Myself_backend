@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { BlogPost } from "@/lib/types";
+import Image from "next/image";
 import { toast } from "sonner";
 
 const blogSchema = z.object({
@@ -62,18 +63,6 @@ export default function AddBlogsForm({
     },
   });
 
-  const featuredImage = form.watch("featuredImage");
-
-  const onImageChange = (file?: File) => {
-    if (!file) {
-      setImagePreview(null);
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e) => setImagePreview(String(e.target?.result || ""));
-    reader.readAsDataURL(file);
-  };
 
   // Pre-fill form for edit mode
   useEffect(() => {
@@ -317,10 +306,12 @@ export default function AddBlogsForm({
                   />
                   <div>
                     {imagePreview && (
-                      <img
+                      <Image
                         src={imagePreview}
                         alt="preview"
                         className="mt-3 max-h-40 rounded-md"
+                        height={400}
+                        width={400}
                       />
                     )}
                   </div>

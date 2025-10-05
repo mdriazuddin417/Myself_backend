@@ -36,9 +36,9 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
   // Keep external form state synced with editor content
   useEffect(() => {
     if (editor && value !== editor.getHTML()) {
-      editor.commands.setContent(value || "", false)
+      editor.commands.setContent(value || "", { emitUpdate: false })
     }
-  }, [value])
+  }, [value,editor])
 
   if (!editor) return null
 

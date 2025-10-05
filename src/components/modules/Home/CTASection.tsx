@@ -7,7 +7,7 @@ const CTASection = () => {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-balance">Ready to bring your ideas to life?</h2>
             <p className="text-lg text-muted-foreground mb-8 text-pretty">
-              Let's collaborate on your next project. I'm always excited to work on innovative solutions that make a
+              Let &apo s s collaborate on your next project. I &apos m always excited to work on innovative solutions that make a
               real impact.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -1,5 +1,6 @@
 "use server";
 
+import { BlogPost } from "@/lib/types";
 import { revalidateTag } from "next/cache";
 
 export const getBlogBySlug = async (slug: string) => {
@@ -33,7 +34,7 @@ export const deleteBlogById = async (id: string) => {
   }
   return data;
 };
-export const createBlog = async (blogData: any) => {
+export const createBlog = async (blogData:  Partial<BlogPost>) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/post`, {
     method: "POST",
     headers: {
@@ -48,7 +49,7 @@ export const createBlog = async (blogData: any) => {
   }
   return result;
 };
-export const updateBlog = async (id:string,updateBody: any) => {
+export const updateBlog = async (id:string,updateBody: Partial<BlogPost>) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/post/${id}`, {
     method: "PATCH",
     headers: {

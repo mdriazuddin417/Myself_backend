@@ -22,7 +22,7 @@ export default async function ProjectsPage() {
   const { data: allProjects } = await res.json()
 
   // Get unique technologies for filter
-  const allTechnologies = Array.from(new Set(allProjects?.flatMap((project: Project) => project.technologies)))
+  const allTechnologies: string[] = Array.from(new Set(allProjects?.flatMap((project: Project) => project.technologies))) as string[]
 
 
 
@@ -91,7 +91,7 @@ export default async function ProjectsPage() {
         <section className="mt-16 bg-muted/30 rounded-2xl p-8">
           <h2 className="text-2xl font-bold mb-6 text-center">Technologies I Work With</h2>
           <div className="flex flex-wrap justify-center gap-3">
-            {allTechnologies?.length>0&&allTechnologies.map((tech) => (
+            {allTechnologies?.length>0&&allTechnologies.map((tech : string) => (
               <Badge
                 key={tech}
                 variant="outline"
@@ -104,7 +104,7 @@ export default async function ProjectsPage() {
           <div className="text-center mt-8">
             <p className="text-muted-foreground mb-4">Interested in working together on a project?</p>
             <Button asChild size="lg">
-              <Link href="/contact">Let's Collaborate</Link>
+              <Link href="/contact">Let&apos;s Collaborate</Link>
             </Button>
           </div>
         </section>

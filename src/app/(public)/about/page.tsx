@@ -69,7 +69,7 @@ export default function AboutPage() {
                     className="w-full h-full rounded-full object-cover border-4 border-primary/20"
                   />
                 </div>
-                <CardTitle className="text-2xl">{resume.personalInfo.fullName ?? ''}</CardTitle>
+                <CardTitle className="text-2xl">{resume.personalInfo.name ?? ''}</CardTitle>
                 <CardDescription className="text-lg">Full-Stack Developer</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -128,15 +128,14 @@ export default function AboutPage() {
             <section>
               <h2 className="text-3xl font-bold mb-6">My Story</h2>
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="text-muted-foreground leading-relaxed">{resume.summary ?? ''}</p>
                 <p className="text-muted-foreground leading-relaxed">
                   My journey in web development started during my computer science studies at UC Berkeley, where I
                   discovered my passion for creating digital experiences that solve real-world problems. Since then,
-                  I've had the privilege of working with startups and established companies, helping them build scalable
+                  I&apos;ve had the privilege of working with startups and established companies, helping them build scalable
                   applications that serve thousands of users.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
+                  When I&apos;m not coding, you can find me exploring new technologies, contributing to open-source projects,
                   or sharing my knowledge through blog posts and mentoring fellow developers. I believe in continuous
                   learning and staying up-to-date with the latest industry trends and best practices.
                 </p>
@@ -259,8 +258,8 @@ export default function AboutPage() {
                         <h3 className="font-semibold text-sm">{cert.name}</h3>
                         <p className="text-muted-foreground text-sm">{cert.issuer}</p>
                         <p className="text-xs text-muted-foreground">
-                          Issued: {new Date(cert?.issueDate || "").getFullYear()}
-                          {cert?.expiryDate && ` • Expires: ${new Date(cert.expiryDate || "").getFullYear()}`}
+                          Issued: {new Date(cert?.date || "").getFullYear()}
+                          {cert?.date && ` • Expires: ${new Date(cert.date || "").getFullYear()}`}
                         </p>
                       </div>
                     ))}

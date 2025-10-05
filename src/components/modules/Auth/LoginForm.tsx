@@ -13,10 +13,7 @@ import { Input } from "@/components/ui/input";
 import { signIn } from "next-auth/react";
 import { FieldValues, useForm } from "react-hook-form";
 
-// type LoginFormValues = {
-//   email: string;
-//   password: string;
-// };
+
 
 export default function LoginForm() {
   const form = useForm<FieldValues>({
@@ -28,12 +25,7 @@ export default function LoginForm() {
 
   const onSubmit = async (values: FieldValues) => {
     try {
-      // const res = await login(values);
-      // if (res?.id) {
-      //   toast.success("User Logged in Successfully");
-      // } else {
-      //   toast.error("User Login Failed");
-      // }
+
       signIn("credentials", {
         ...values,
         callbackUrl: "/admin",
@@ -41,10 +33,6 @@ export default function LoginForm() {
     } catch (err) {
       console.error(err);
     }
-  };
-
-  const handleSocialLogin = (provider: "google" | "github") => {
-    console.log(`Login with ${provider}`);
   };
 
   return (

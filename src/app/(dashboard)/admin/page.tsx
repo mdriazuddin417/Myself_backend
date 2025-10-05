@@ -3,31 +3,44 @@
 import BestProjectAdmin from "@/components/modules/admin/blog/BestProjectAdmin";
 import RecentBlogAdmin from "@/components/modules/admin/blog/RecentBlogAdmin";
 import { User } from "@/components/navigation";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
-import {
-  dummyBlogPosts,
-  dummyContactMessages,
-  dummyProjects,
-} from "@/lib/dummy-data";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BlogPost, Project } from "@/lib/types";
+import { getAllBlog } from "@/services/PostServices";
+import { getAllProject } from "@/services/ProjectService";
+
 import { BookOpen, Eye, FolderOpen } from "lucide-react";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export default function AdminDashboard() {
-
+  const [allData, setAllData] = useState<{
+    blogPosts: BlogPost[];
+    projects: Project[];
+  }>({
+    blogPosts: [],
+    projects: [],
+  });
+  useEffect(() => {
+    const fetchData = async () => {
+      const blogPosts = await getAllBlog();
+      const projects = await getAllProject();
+      setAllData({
+        blogPosts,
+        projects,
+      });
+    };
+    fetchData();
+  });
   const session = useSession();
 
   const user = session.data?.user as User;
 
-
-  const publishedPosts = dummyBlogPosts.filter((post) => post.published);
-  const draftPosts = dummyBlogPosts.filter((post) => !post.published);
-  const unreadMessages = dummyContactMessages.filter((msg) => !msg.read);
-  const totalViews = dummyBlogPosts.reduce((sum, post) => sum + post.views, 0);
+  const publishedPosts = allData.blogPosts.filter((post) => post.published);
+  const draftPosts = allData.blogPosts.filter((post) => !post.published);
+  const totalViews = allData.blogPosts.reduce(
+    (sum, post) => sum + post.views,
+    0
+  );
 
   const stats = [
     {
@@ -40,8 +53,10 @@ export default function AdminDashboard() {
     },
     {
       title: "Projects",
-      value: dummyProjects.length,
-      description: `${dummyProjects.filter((p) => p.featured).length} featured`,
+      value: allData.projects.length,
+      description: `${
+        allData.projects.filter((p) => p.featured).length
+      } featured`,
       icon: FolderOpen,
       color: "text-green-600",
       bgColor: "bg-green-100 dark:bg-green-900/20",
@@ -55,8 +70,6 @@ export default function AdminDashboard() {
       bgColor: "bg-purple-100 dark:bg-purple-900/20",
     },
   ];
-
-
 
   return (
     <div className="min-h-screen py-8">
@@ -95,11 +108,11 @@ export default function AdminDashboard() {
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Quick Actions */}
           <div className="lg:col-span-2">
-            <BestProjectAdmin/>
+            <BestProjectAdmin />
           </div>
 
           <div className="lg:col-span-2 space-y-6">
-            <RecentBlogAdmin/>
+            <RecentBlogAdmin />
           </div>
         </div>
       </div>

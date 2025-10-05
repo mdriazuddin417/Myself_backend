@@ -1,5 +1,6 @@
 "use server";
 
+import { Project } from "@/lib/types";
 import { revalidateTag } from "next/cache";
 
 export const getAllProject = async () => {
@@ -23,7 +24,7 @@ export const deleteProjectById = async (id: string) => {
   }
   return data;
 };
-export const createProject = async (projectData: any) => {
+export const createProject = async (projectData: Partial<Project>) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/project`, {
     method: "POST",
     headers: {
@@ -38,7 +39,7 @@ export const createProject = async (projectData: any) => {
   }
   return result;
 };
-export const updateProject = async (id:string,updateBody: any) => {
+export const updateProject = async (id:string,updateBody: Partial<Project>) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/project/${id}`, {
     method: "PATCH",
     headers: {

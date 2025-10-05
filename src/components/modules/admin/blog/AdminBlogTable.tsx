@@ -10,12 +10,9 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components
 import { BlogPost } from "@/lib/types"
 import { Edit, Eye, Plus, Search, TrendingUp } from "lucide-react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function AdminBlogTable({initialBlogPosts}: {initialBlogPosts: BlogPost[]}) {
-  // const { user, isLoading } = useAuth()
-  const router = useRouter()
   const [searchTerm, setSearchTerm] = useState("")
   const [filterStatus, setFilterStatus] = useState<"all" | "published" | "draft">("all")
 

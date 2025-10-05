@@ -38,9 +38,6 @@ export default async function ProjectPage({ params }: {
   }
 
   const relatedProjects = [project]
-  // const relatedProjects = dummyProjects
-  //   .filter((p) => p.id !== project.id && p.technologies.some((tech) => project.technologies.includes(tech)))
-  //   .slice(0, 3)
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -309,7 +306,7 @@ export default async function ProjectPage({ params }: {
             <Card>
               <CardHeader>
                 <CardTitle>Interested in Similar Work?</CardTitle>
-                <CardDescription>Let's discuss your project requirements</CardDescription>
+                <CardDescription>Let&apos;s discuss your project requirements</CardDescription>
               </CardHeader>
               <CardContent>
                 <Button asChild className="w-full">

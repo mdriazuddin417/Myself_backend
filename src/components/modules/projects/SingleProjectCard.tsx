@@ -65,7 +65,7 @@ const SingleProjectCard = ({ project }: { project: Project }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Calendar className="w-4 h-4" />
-            <span>{new Date(project?.startDate).getFullYear()}</span>
+            <span>{new Date(project?.startDate ??'').getFullYear()}</span>
           </div>
 
           <div className="flex gap-2">
