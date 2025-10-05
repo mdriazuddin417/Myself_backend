@@ -78,7 +78,7 @@ export default async function BlogPage() {
                 </div>
                 <div className="p-8 flex flex-col justify-center">
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {featuredPost.tags.slice(0, 3).map((tag : string) => (
+                    {featuredPost?.tags?.slice(0, 3).map((tag : string) => (
                       <Badge key={tag} variant="secondary">
                         {tag}
                       </Badge>

@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { File, Home, LogOut, PlusCircle } from "lucide-react";
-import { signOut } from "next-auth/react";
+import { File, Home, PlusCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function Sidebar() {
@@ -32,7 +30,7 @@ export default function Sidebar() {
       </nav>
 
       {/* Bottom action */}
-      <div className="p-4 border-t border-gray-500">
+      {/* <div className="p-4 border-t border-gray-500">
         {session.status === "authenticated" && (
           <Button
             variant="destructive"
@@ -43,7 +41,7 @@ export default function Sidebar() {
             Logout
           </Button>
         )}
-      </div>
+      </div> */}
     </aside>
   );
 }

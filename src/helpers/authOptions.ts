@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
+
 declare module "next-auth" {
   interface Session {
     user: {
@@ -17,7 +18,7 @@ declare module "next-auth" {
     name?: string | null;
     email?: string | null;
     image?: string | null;
-     role: "ADMIN" | "USER";
+    role: "ADMIN" | "USER";
   }
 }
 
@@ -39,8 +40,10 @@ export const authOptions: NextAuthOptions = {
           console.error("Email or Password is missing");
           return null;
         }
+        console.log({ credentials });
 
         try {
+          // const toastId = toast.loading('Logging in...');
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_BASE_API}/api/v1/auth/login`,
             {
@@ -57,9 +60,12 @@ export const authOptions: NextAuthOptions = {
           console.log("Response From Backend:", res);
           if (!res?.ok) {
             console.error("Login Failed", await res.text());
+          
+            // toast.dismiss(toastId)
             return null;
           }
-
+        
+          // toast.dismiss(toastId)
           const user = await res.json();
           if (user.id) {
             return {

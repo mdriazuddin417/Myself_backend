@@ -10,10 +10,12 @@ import { getAllProject } from "@/services/ProjectService";
 
 import { BookOpen, Eye, FolderOpen } from "lucide-react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
+  const router = useRouter()
   const user = session?.user as User | undefined;
 
   const [allData, setAllData] = useState<{
@@ -85,6 +87,12 @@ export default function AdminDashboard() {
   // Optional: handle auth loading state (prevents hydration mismatch & undefined reads)
   const greeting =
     status === "loading" ? "..." : (user?.name ?? "there");
+
+    // useEffect(()=>{
+    //   if(!user){
+    //     router.push('/login')
+    //   }
+    // },[])
 
   return (
     <div className="min-h-screen py-8">

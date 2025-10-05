@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { BlogPost } from "@/lib/types";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { toast } from "sonner";
 
@@ -48,7 +49,7 @@ export default function AddBlogsForm({
 }: AddBlogsFormProps) {
   const router = useRouter();
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-
+  const {data:userDetails} = useSession();
   const form = useForm<FormValues>({
     resolver: zodResolver(blogSchema),
     defaultValues: {
@@ -58,7 +59,7 @@ export default function AddBlogsForm({
       published: false,
       tags: "",
       readTime: "10",
-      publishedAt: "",
+      publishedAt: new Date().toISOString(),
       featuredImage: "",
     },
   });
@@ -99,6 +100,7 @@ export default function AddBlogsForm({
         body: JSON.stringify({
           ...data,tags:data?.tags?.split(","),
           readTime:data?.readTime?parseInt(data?.readTime):0,
+          authorId:userDetails?.user.id
         })
       }
     );

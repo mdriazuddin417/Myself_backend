@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/dashboard/", "/login"],
+      disallow: ["/admin", "/login"],
     },
-    sitemap: "https://alexjohnson.dev/sitemap.xml",
+    sitemap: "https://myportfolio-frontend-lemon.vercel.app/sitemap.xml",
   }
 }

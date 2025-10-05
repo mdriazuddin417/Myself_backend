@@ -17,10 +17,10 @@ export default function AdminBlogTable({initialBlogPosts}: {initialBlogPosts: Bl
   const [filterStatus, setFilterStatus] = useState<"all" | "published" | "draft">("all")
 
   // Filter posts based on search and status
-  const filteredPosts = initialBlogPosts.filter((post) => {
+  const filteredPosts = initialBlogPosts?.filter((post) => {
     const matchesSearch =
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+      post?.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post?.excerpt?.toLowerCase().includes(searchTerm.toLowerCase())
     const matchesStatus =
       filterStatus === "all" ||
       (filterStatus === "published" && post.published) ||
@@ -28,9 +28,9 @@ export default function AdminBlogTable({initialBlogPosts}: {initialBlogPosts: Bl
     return matchesSearch && matchesStatus
   })
 
-  const publishedCount = initialBlogPosts.filter((post) => post.published).length
-  const draftCount = initialBlogPosts.filter((post) => !post.published).length
-  const totalViews = initialBlogPosts.reduce((sum, post) => sum + post.views, 0)
+  const publishedCount = initialBlogPosts?.filter((post) => post.published).length
+  const draftCount = initialBlogPosts?.filter((post) => !post.published).length
+  const totalViews = initialBlogPosts?.reduce((sum, post) => sum + post.views, 0)
 
   return (
     <div className="min-h-screen py-8">
