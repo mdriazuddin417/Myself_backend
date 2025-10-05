@@ -12,7 +12,7 @@ const HeroSection = () => {
               <div className="space-y-8">
                 <div className="space-y-4">
                   <h1 className="text-4xl lg:text-6xl font-bold text-balance">
-                    Hi, I &apos m <span className="text-primary">MD. Riaz Uddin</span>
+                    Hi, I &apos; m <span className="text-primary">MD. Riaz Uddin</span>
                   </h1>
                   <p className="text-xl lg:text-2xl text-muted-foreground text-pretty">
                     Full-Stack Developer crafting exceptional digital experiences with modern technologies
@@ -57,7 +57,7 @@ const HeroSection = () => {
                   <div className="relative bg-card border border-border rounded-2xl p-8 backdrop-blur-sm">
                     <Image
                       src="https://i.ibb.co.com/RpMrKhv9/my-photo.jpg"
-                      alt="Alex Johnson - Professional Headshot"
+                      alt="MD Riaz Uddin - Professional Headshot"
                       width={400}
                       height={400}
                       className="w-full h-auto rounded-xl"

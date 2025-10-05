@@ -62,24 +62,24 @@ export default function AboutPage() {
               <CardHeader className="text-center">
                 <div className="relative w-32 h-32 mx-auto mb-4">
                   <Image
-                    src="/professional-headshot.png"
-                    alt="Alex Johnson"
+                    src="https://i.ibb.co.com/RpMrKhv9/my-photo.jpg"
+                    alt="MD Riaz Uddin"
                     width={128}
                     height={128}
                     className="w-full h-full rounded-full object-cover border-4 border-primary/20"
                   />
                 </div>
-                <CardTitle className="text-2xl">{resume.personalInfo.name ?? ''}</CardTitle>
+                <CardTitle className="text-2xl">MD Riaz Uddin</CardTitle>
                 <CardDescription className="text-lg">Full-Stack Developer</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-3 text-sm">
                   <MapPin className="w-4 h-4 text-muted-foreground" />
-                  <span>{resume.personalInfo.location}</span>
+                  <span>Brahmanbaria, Bangladesh</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <Mail className="w-4 h-4 text-muted-foreground" />
-                  <span>{resume.personalInfo.email}</span>
+                  <span>mdriazuddin417@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <Calendar className="w-4 h-4 text-muted-foreground" />
@@ -104,11 +104,11 @@ export default function AboutPage() {
               <CardContent className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Years of Experience</span>
-                  <span className="font-semibold">5+</span>
+                  <span className="font-semibold">3+</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Projects Completed</span>
-                  <span className="font-semibold">50+</span>
+                  <span className="font-semibold">30+</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Technologies Mastered</span>

@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import type { Resume } from "@/lib/types";
 import {
   Download,
+  Edit,
   ExternalLink,
   Github,
   Globe,
@@ -35,8 +36,8 @@ export function ResumeViewer({ resume }: ResumeViewerProps) {
         <div className="flex space-x-4">
           <Link href="/resume/edit">
           <Button>
-            <Download className="h-4 w-4 mr-2" />
-            Resume Edit
+            <Edit className="h-4 w-4 mr-2" />
+            Resume Build
           </Button>
         </Link>
 
@@ -48,7 +49,7 @@ export function ResumeViewer({ resume }: ResumeViewerProps) {
       </div>
 
       {/* Resume Content */}
-      <div className="bg-card border border-border rounded-lg p-8 space-y-8 print:border-0 print:shadow-none">
+      <div  className="bg-card border border-border rounded-lg p-8 space-y-8 print:border-0 print:shadow-none">
         {/* Personal Info */}
         <header className="text-center space-y-4">
           <h1 className="text-4xl font-bold">{resume.personalInfo.name}</h1>

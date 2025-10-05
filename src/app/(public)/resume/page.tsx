@@ -1,18 +1,35 @@
+"use client";
 
-import { ResumeViewer } from "@/components/modules/resume/resume-viewer"
+import { ResumeViewer } from "@/components/modules/resume/resume-viewer";
 
-import { dummyResume } from "@/lib/dummy-data"
-import type { Metadata } from "next"
+import { dummyResume } from "@/lib/dummy-data";
+import { Resume } from "@/lib/types";
+import { useEffect, useState } from "react";
 
-export const metadata: Metadata = {
-  title: "Resume - John Doe",
-  description: "Professional resume showcasing experience, education, skills, and certifications.",
-}
 
 export default function ResumePage() {
+  const [resume, setResume] = useState<Resume | null>(null);
+
+  useEffect(() => {
+    fetchResume();
+  }, []);
+
+
+  const fetchResume = async () => {
+    if(!localStorage.getItem("resume_info")){
+      return;
+    }
+    const storData =await JSON.parse(localStorage.getItem("resume_info") as string);
+    if (storData) {
+      setResume(storData);
+    }
+  };
+
+
+
   return (
     <div className="min-h-screen bg-background ">
-        <ResumeViewer resume={dummyResume} />
+      <ResumeViewer resume={resume?resume:dummyResume} />
     </div>
-  )
+  );
 }

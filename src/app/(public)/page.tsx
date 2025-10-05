@@ -8,7 +8,7 @@ import { generateMetadata } from "@/lib/metadata"
 export const metadata = generateMetadata({
   title: "Home",
   description:
-    "Alex Johnson - Full-Stack Developer specializing in React, Next.js, TypeScript, and modern web technologies. Building scalable applications and innovative solutions in San Francisco.",
+    "MD Riaz Uddin - Full-Stack Developer specializing in React, Next.js, TypeScript, and modern web technologies. Building scalable applications and innovative solutions in San Francisco.",
 })
 
 export default function HomePage() {

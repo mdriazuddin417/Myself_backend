@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Github, Globe, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react"
 import { useState } from "react"
+import { toast } from "sonner"
 
 export default function ContactClientPage() {
   const [formData, setFormData] = useState({
@@ -33,6 +34,7 @@ export default function ContactClientPage() {
 
     // Reset success message after 3 seconds
     setTimeout(() => setIsSubmitted(false), 3000)
+    toast.success('Message sent successfully!')
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -74,7 +76,7 @@ export default function ContactClientPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Email</h3>
-                    <p className="text-muted-foreground">alex.johnson@email.com</p>
+                    <p className="text-muted-foreground">mdriazuddin417@gmail.com</p>
                   </div>
                 </div>
 
@@ -84,7 +86,7 @@ export default function ContactClientPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Phone</h3>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <p className="text-muted-foreground">+88 01786552964</p>
                   </div>
                 </div>
 
@@ -94,7 +96,7 @@ export default function ContactClientPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Location</h3>
-                    <p className="text-muted-foreground">San Francisco, CA</p>
+                    <p className="text-muted-foreground">Brahmanbaria, Bangladesh</p>
                   </div>
                 </div>
               </div>
@@ -104,7 +106,7 @@ export default function ContactClientPage() {
                 <h3 className="font-semibold text-foreground mb-4">Follow Me</h3>
                 <div className="flex gap-4">
                   <a
-                    href="https://github.com/alexjohnson"
+                    href="https://github.com/mdriazuddin417"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-card border rounded-lg hover:bg-accent transition-colors"
@@ -112,7 +114,7 @@ export default function ContactClientPage() {
                     <Github className="h-6 w-6" />
                   </a>
                   <a
-                    href="https://linkedin.com/in/alexjohnson"
+                    href="https://www.linkedin.com/in/riaz-uddin-457421214/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-card border rounded-lg hover:bg-accent transition-colors"
@@ -120,7 +122,7 @@ export default function ContactClientPage() {
                     <Linkedin className="h-6 w-6" />
                   </a>
                   <a
-                    href="https://alexjohnson.dev"
+                    href="https://www.linkedin.com/in/riaz-uddin-457421214/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-card border rounded-lg hover:bg-accent transition-colors"

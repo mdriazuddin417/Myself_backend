@@ -93,7 +93,7 @@ export function Navigation() {
               isAdmin && !isAdminRoute && (
                 <Link href="/admin" className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent">
                   <Settings className="w-4 h-4" />
-                  <span>Admin</span>
+                  <span>Dashboard</span>
                 </Link>
               )
             }

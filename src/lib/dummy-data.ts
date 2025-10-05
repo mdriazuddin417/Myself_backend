@@ -5,22 +5,22 @@ import type { ContactMessage, Resume } from "./types"
 export const dummyResume: Resume = {
   id: "1",
   personalInfo: {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "+1 (555) 123-4567",
-    location: "San Francisco, CA",
-    website: "https://johndoe.dev",
-    linkedin: "https://linkedin.com/in/johndoe",
-    github: "https://github.com/johndoe",
+    name: "MD Riaz Uddin",
+    email: "mdriazuddin417@gmail.com",
+    phone: "+88017865529647",
+    location: "https://github.com/mdriazuddin417",
+    website: "https://github.com/mdriazuddin417",
+    linkedin: "https://www.linkedin.com/in/riaz-uddin-457421214/",
+    github: "https://github.com/mdriazuddin417",
     summary:
       "Passionate full-stack developer with 5+ years of experience building scalable web applications. Expertise in React, Node.js, and cloud technologies. Strong advocate for clean code, test-driven development, and user-centered design.",
   },
   experience: [
     {
       id: "1",
-      company: "TechCorp Inc.",
-      position: "Senior Full-Stack Developer",
-      startDate: "2022-03",
+      company: "Knoct.io",
+      position: "Full-Stack Developer",
+      startDate: "2022-23",
       current: true,
       description:
         "Lead development of customer-facing web applications serving 100K+ users. Architect and implement scalable solutions using modern web technologies.",
@@ -33,10 +33,10 @@ export const dummyResume: Resume = {
     },
     {
       id: "2",
-      company: "StartupXYZ",
+      company: "AarogyaId",
       position: "Full-Stack Developer",
       startDate: "2020-06",
-      endDate: "2022-02",
+      endDate: "2023-25",
       current: false,
       description:
         "Developed and maintained multiple web applications in a fast-paced startup environment. Collaborated closely with design and product teams.",
@@ -49,10 +49,10 @@ export const dummyResume: Resume = {
     },
     {
       id: "3",
-      company: "Digital Agency Pro",
+      company: "Swasthx",
       position: "Frontend Developer",
-      startDate: "2019-01",
-      endDate: "2020-05",
+      startDate: "2025-",
+      endDate: "---",
       current: false,
       description:
         "Created responsive websites and web applications for diverse clients. Focused on performance optimization and accessibility.",
@@ -67,11 +67,11 @@ export const dummyResume: Resume = {
   education: [
     {
       id: "1",
-      institution: "University of California, Berkeley",
+      institution: "National University of Bangladesh",
       degree: "Bachelor of Science",
       field: "Computer Science",
-      startDate: "2015-08",
-      endDate: "2019-05",
+      startDate: "2018-22",
+      endDate: "2022-05",
       gpa: "3.8",
       achievements: [
         "Magna Cum Laude graduate",
@@ -84,15 +84,15 @@ export const dummyResume: Resume = {
   skills: [
     {
       category: "Frontend",
-      items: ["React", "Next.js", "TypeScript", "Vue.js", "HTML5", "CSS3", "Tailwind CSS", "SASS"],
+      items: ["React", "Next.js", "TypeScript", "HTML5", "CSS3", "Tailwind CSS", "SASS"],
     },
     {
       category: "Backend",
-      items: ["Node.js", "Express", "Python", "FastAPI", "PostgreSQL", "MongoDB", "Redis", "GraphQL"],
+      items: ["Node.js", "Express",  "FastAPI", "PostgreSQL", "MongoDB", "Redis", "GraphQL"],
     },
     {
       category: "Cloud & DevOps",
-      items: ["AWS", "Vercel", "Docker", "Kubernetes", "CI/CD", "GitHub Actions", "Terraform"],
+      items: ["AWS", "Vercel", "Docker", "CI/CD", "GitHub Actions", "Terraform"],
     },
     {
       category: "Tools & Others",
@@ -113,13 +113,6 @@ export const dummyResume: Resume = {
       issuer: "Google Cloud",
       date: "2023-03",
       url: "https://cloud.google.com/certification",
-    },
-    {
-      id: "3",
-      name: "Certified Kubernetes Administrator",
-      issuer: "Cloud Native Computing Foundation",
-      date: "2022-11",
-      url: "https://www.cncf.io/certification/cka/",
     },
   ],
   createdAt: new Date("2024-01-01"),

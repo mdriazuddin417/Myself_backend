@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 
 export const siteConfig = {
-  name: "Alex Johnson - Full-Stack Developer",
+  name: "MD Riaz Uddin - Full-Stack Developer",
   description:
     "Experienced Full-Stack Developer specializing in React, Next.js, TypeScript, and modern web technologies. Building scalable applications and innovative solutions.",
   url: "https://alexjohnson.dev",
   ogImage: "/professional-headshot.png",
-  author: "Alex Johnson",
+  author: "MD Riaz Uddin",
   keywords: [
     "Full-Stack Developer",
     "React Developer",

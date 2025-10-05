@@ -9,6 +9,8 @@ import { Textarea } from "@/components/ui/textarea"
 import type { Resume } from "@/lib/types"
 import { Eye, Plus, Save, Trash2 } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -18,11 +20,16 @@ interface ResumeEditorProps {
 }
 
 export function ResumeEditor({ resume, onSave }: ResumeEditorProps) {
+  const router = useRouter()
   const [editedResume, setEditedResume] = useState<Resume>(resume)
 
 
-  const handleSave = () => {
-    onSave(editedResume)
+  const handleSave = async() => {
+    // onSave(editedResume)
+    await localStorage.setItem('resume_info', JSON.stringify(editedResume));
+    router.push('/resume');
+
+    
     toast.success("Resume saved successfully")
   }
 
