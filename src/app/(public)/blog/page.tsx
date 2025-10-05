@@ -1,32 +1,30 @@
-import SingleBlogPost from "@/components/modules/blogs/SingleBlogPost"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { generateMetadata } from "@/lib/metadata"
-import { BlogPost } from "@/lib/types"
-import { ArrowRight, Calendar, Clock, Eye, Search } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import SingleBlogPost from "@/components/modules/blogs/SingleBlogPost";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { generateMetadata } from "@/lib/metadata";
+import { BlogPost } from "@/lib/types";
+import { getAllBlog } from "@/services/PostServices";
+import { ArrowRight, Calendar, Clock, Eye, Search } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export const metadata = generateMetadata({
   title: "Blog",
   description:
     "Insights, tutorials, and thoughts on web development, technology trends, and best practices. Learn about React, Next.js, TypeScript, and modern web technologies.",
-})
+});
 
 export default async function BlogPage() {
-     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1//post`, {
-    next: {
-      tags: ["POSTS"],
-    },
-  });
-  const { data: publishedPosts } = await res.json()
-  const featuredPost = publishedPosts?.[0] || null
-  const otherPosts = publishedPosts?.slice(1)
+  const publishedPosts = await getAllBlog();
+  const featuredPost = publishedPosts?.[0] || null;
+  const otherPosts = publishedPosts?.slice(1);
 
   // Get unique tags for filter
-  const allTags = Array.from(new Set(publishedPosts?.flatMap((post: BlogPost) => post?.tags)))
+  const allTags = Array.from(
+    new Set(publishedPosts?.flatMap((post: BlogPost) => post?.tags))
+  );
 
   return (
     <div className="min-h-screen py-12">
@@ -35,7 +33,8 @@ export default async function BlogPage() {
         <div className="text-center mb-16">
           <h1 className="text-4xl lg:text-5xl font-bold mb-6">Blog</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Insights, tutorials, and thoughts on web development, technology trends, and best practices
+            Insights, tutorials, and thoughts on web development, technology
+            trends, and best practices
           </p>
         </div>
 
@@ -50,7 +49,7 @@ export default async function BlogPage() {
               <Button variant="outline" size="sm">
                 All
               </Button>
-              {allTags?.slice(0, 5)?.map((tag,index) => (
+              {allTags?.slice(0, 5)?.map((tag, index) => (
                 <Button key={index} variant="ghost" size="sm">
                   {tag as string}
                 </Button>
@@ -67,7 +66,10 @@ export default async function BlogPage() {
               <div className="grid lg:grid-cols-2 gap-0">
                 <div className="relative overflow-hidden">
                   <Image
-                    src={featuredPost.featuredImage || "/placeholder.svg?height=400&width=600"}
+                    src={
+                      featuredPost.featuredImage ||
+                      "/placeholder.svg?height=400&width=600"
+                    }
                     alt={featuredPost.title}
                     width={600}
                     height={400}
@@ -83,13 +85,21 @@ export default async function BlogPage() {
                     ))}
                   </div>
                   <h3 className="text-2xl lg:text-3xl font-bold mb-4 group-hover:text-primary transition-colors">
-                    <Link href={`/blog/${featuredPost.slug}`}>{featuredPost.title}</Link>
+                    <Link href={`/blog/${featuredPost.slug}`}>
+                      {featuredPost.title}
+                    </Link>
                   </h3>
-                  <p className="text-muted-foreground mb-6 text-pretty">{featuredPost.excerpt}</p>
+                  <p className="text-muted-foreground mb-6 text-pretty">
+                    {featuredPost.excerpt}
+                  </p>
                   <div className="flex items-center gap-6 text-sm text-muted-foreground mb-6">
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
-                      <span>{new Date(featuredPost.publishedAt)?.toLocaleDateString()}</span>
+                      <span>
+                        {new Date(
+                          featuredPost.publishedAt
+                        )?.toLocaleDateString()}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4" />
@@ -116,7 +126,9 @@ export default async function BlogPage() {
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8">All Articles</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {otherPosts?.map((post: BlogPost) => (<SingleBlogPost key={post.id} post={post}/> ))}
+            {otherPosts?.map((post: BlogPost) => (
+              <SingleBlogPost key={post.id} post={post} />
+            ))}
           </div>
         </div>
 
@@ -124,14 +136,19 @@ export default async function BlogPage() {
         <div className="bg-muted/30 rounded-2xl p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Stay Updated</h2>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Subscribe to get notified about new articles and insights on web development and technology trends.
+            Subscribe to get notified about new articles and insights on web
+            development and technology trends.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input type="email" placeholder="Enter your email" className="flex-1" />
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1"
+            />
             <Button>Subscribe</Button>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

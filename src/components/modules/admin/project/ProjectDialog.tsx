@@ -1,24 +1,24 @@
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Project } from "@/lib/types";
-import { updateProject } from "@/services/ProjectService";
+import { createProject, updateProject } from "@/services/ProjectService";
 import { Edit } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -36,7 +36,7 @@ const ProjectDialog = ({
   setSelectedProject = () => {},
   useCase = "add",
 }: Props) => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(useCase === "add" ? true : false);
   const [open, setOpen] = useState(false); // control dialog
   const updateProjectById = async () => {
     const startToastId = toast.loading("Updating project...");
@@ -45,7 +45,7 @@ const ProjectDialog = ({
       selectedProject
     );
     toast.dismiss(startToastId);
-
+    setOpen(false);
     if (result) {
       setSelectedProject(null);
       setIsEditing(false);
@@ -53,14 +53,27 @@ const ProjectDialog = ({
       toast.success("Project updated successfully");
     }
   };
+  const addProject = async () => {
+    const startToastId = toast.loading("Creating project...");
+    console.log({ selectedProject });
+    const result = await createProject({ ...selectedProject, userId: "" });
+    toast.dismiss(startToastId);
+    setOpen(false);
+    if (result) {
+      setSelectedProject(null);
+      setIsEditing(false);
+      setOpen(false); // ✅ close dialog
+      toast.success("Project created successfully");
+    }
+  };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          {useCase === "edit" && (
-            <DialogTitle>{selectedProject?.title || ""}</DialogTitle>
-          )}
+          <DialogTitle>
+            {useCase === "edit" ? selectedProject?.title : "New Project"}
+          </DialogTitle>
           <DialogDescription>Project details and management</DialogDescription>
         </DialogHeader>
         {selectedProject && (
@@ -189,9 +202,7 @@ const ProjectDialog = ({
                       </Button>
                     ) : (
                       <>
-                        <Button
-                          onClick={() => updateProjectById()}
-                        >
+                        <Button onClick={() => updateProjectById()}>
                           Save Changes
                         </Button>
                         <Button
@@ -208,14 +219,11 @@ const ProjectDialog = ({
                     )}
                   </div>
                 )}
-
               </div>
             )}
             <div className="flex justify-end">
               {useCase === "add" && (
-                <Button onClick={() => updateProjectById()}>
-                  Submit
-                </Button>
+                <Button onClick={() => addProject()}>Submit</Button>
               )}
             </div>
           </div>

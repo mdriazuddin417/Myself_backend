@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { File, Home, LogOut, Mail, PlusCircle } from "lucide-react";
+import { File, Home, LogOut, PlusCircle } from "lucide-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 
@@ -13,8 +13,6 @@ export default function Sidebar() {
     { icon: Home, title: "Dashboard", path: "/admin" },
     { icon: PlusCircle, title: "Project Management", path: "/admin/projects" },
     { icon: File, title: "Blog Management", path: "/admin/blog" },
-    { icon: File, title: "Analytics", path: "/admin/analytics" },
-    { icon: Mail, title: "Messages", path: "/admin/messages" },
   ];
 
   return (
