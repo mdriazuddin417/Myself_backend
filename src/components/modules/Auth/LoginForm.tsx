@@ -14,8 +14,6 @@ import { signIn } from "next-auth/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-
-
 export default function LoginForm() {
   const form = useForm<FieldValues>({
     defaultValues: {
@@ -25,22 +23,21 @@ export default function LoginForm() {
   });
 
   const onSubmit = async (values: FieldValues) => {
-    
     try {
-      if(!values?.email || !values?.password){
-        toast.error("Email or Password is missing")
-        return
+      if (!values?.email || !values?.password) {
+        toast.error("Email or Password is missing");
+        return;
       }
 
-     const toastId= toast.loading('Login....')
+      const toastId = toast.loading("Login....");
 
       signIn("credentials", {
         ...values,
         callbackUrl: "/admin",
       });
-      toast.success('Login successful',{id:toastId})
+      toast.dismiss(toastId);
     } catch (err) {
-      toast.error('Login Failed')
+      toast.error("Login Failed");
       console.error(err);
     }
   };

@@ -46,7 +46,7 @@ export default function Footer() {
 
           {/* Right */}
           <div className="text-sm text-gray-400">
-            © {currentYear} next level team. All rights reserved.
+            © {currentYear} next level and smart developer. All rights reserved.
           </div>
         </div>
       </div>
